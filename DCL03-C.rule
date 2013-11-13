@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\bassert()\b</pattern>
+<message>
+<id>CERTassert</id>
+<severity>warning</severity>
+<summary>CERT assert.  uses the assert() macro to assert a property concerning a memory-mapped structure that is essential for the code to behave correctly</summary>
+</message>
+</rule>
+
