@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\bmalloc()\b</pattern>
+<message>
+<id>CERTmalloc</id>
+<severity>warning</severity>
+<summary>CERT malloc.This memory is subsequently leaked when the threads return.</summary>
+</message>
+</rule>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\bstrncpy()\b</pattern>
+<message>
+<id>CERTstrncpy</id>
+<severity>warning</severity>
+<summary>CERT strncpy. ensure that null terminator is intended and present</summary>
+</message>
+</rule>
+

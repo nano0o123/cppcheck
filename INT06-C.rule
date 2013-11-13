@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\batoi()\b</pattern>
+<message>
+<id>CERTatoi</id>
+<severity>warning</severity>
+<summary>CERT atio. noncompliant (atoi())converts the string token stored in the static array buff to a signed integer value using the atoi() function.</summary>
+</message>
+</rule>

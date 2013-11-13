@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\bmemset()\b</pattern>
+<message>
+<id>CERTmemset</id>
+<severity>warning</severity>
+<summary>CERT memset. undefined behavior</summary>
+</message>
+</rule>
+
