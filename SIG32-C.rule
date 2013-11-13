@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rule version="1">
+<pattern>\blongjmp()\b</pattern>
+<message>
+<id>CERTlongjmp</id>
+<severity>warning</severity>
+<summary>CERT longjmp. buf is not set to NULL as a result of the interrupt.</summary>
+</message>
+</rule>
+
