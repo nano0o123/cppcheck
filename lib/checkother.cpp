@@ -3793,3 +3793,33 @@ void CheckOther::varFuncNullUBError(const Token *tok)
                 "    return 0;\n"
                 "}");
 }
+
+
+
+
+
+
+void CheckOther::warningOldStylePointerCast()
+{
+   
+    
+    for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
+        // Old style pointer casting..
+        if (Token::Match(tok ", %var% )"))
+                         {
+                             // report error
+                             unboundArrayWithInitWarning(tok);
+                         }
+    
+}
+
+            
+//Report error
+
+            void CheckOther::deallocWarning()
+        {
+            reportError(tok, // location
+                        Severity::warning, // severity
+                        "unboundArrayWithInit", // id
+                        "Should have implicit array size when initializing with elements, not just []"); // message
+            
