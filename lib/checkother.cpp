@@ -3805,7 +3805,7 @@ void CheckOther::warninguUnboundArrayWithInit()
     
     for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
         // Old style pointer casting..
-        if (Token::Match(tok ", %var% )"))
+        if (Token::Match(tok ", %var% [ ])')))
                          {
                              // report error
                              unboundArrayWithInitWarning(tok);
