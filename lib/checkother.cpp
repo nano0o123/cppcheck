@@ -31,7 +31,7 @@
 // Register this check class (by creating a static instance of it)
 namespace {
     CheckOther instance;
-    unboundArrayWithInit();
+    UnboundArrayWithInit();
 }
 
 //----------------------------------------------------------------------------------
@@ -3799,7 +3799,7 @@ void CheckOther::varFuncNullUBError(const Token *tok)
 
 
 
-void CheckOther::warningOldStylePointerCast()
+void CheckOther::warninguUnboundArrayWithInit()
 {
    
     
