@@ -3799,27 +3799,21 @@ void CheckOther::varFuncNullUBError(const Token *tok)
 
 
 
-void CheckOther::warninguUnboundArrayWithInit()
-{
-   
+unboundArrayWithInit()
+
+for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
     
-    for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
-        // Old style pointer casting..
-        if (Token::Match(tok ", %var% [ ])')))
-                         {
-                             // report error
-                             unboundArrayWithInitWarning(tok);
-                         }
+    if (Token::Match(tok, "%var%[] = {" )) {
+        
+        unboundArrayWithInitWarning(tok);
+    }
     
 }
 
-            
-//Report error
+void CheckOther::unboundArrayWithInitWarning()
 
-            void CheckOther::deallocWarning()
-        {
-            reportError(tok, // location
-                        Severity::warning, // severity
-                        "unboundArrayWithInit", // id
-                        "Should have implicit array size when initializing with elements, not just []"); // message
+reportError(tok, // location                        Severity::warning, // severity
             
+            "unboundArrayWithInit", // id
+            
+            "Should have implicit array size when initializing with elements, not just []"); // messag
