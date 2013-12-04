@@ -31,6 +31,7 @@
 // Register this check class (by creating a static instance of it)
 namespace {
     CheckOther instance;
+
     
 }
 
@@ -3799,7 +3800,8 @@ void CheckOther::varFuncNullUBError(const Token *tok)
 
 
 
-unboundArrayWithInit()
+void CheckOther::unboundArrayWithInit()
+
 
 for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
     
@@ -3810,10 +3812,10 @@ for (const Token *tok = _tokenizer->tokens(); tok; tok = tok->next()) {
     
 }
 
-void CheckOther::unboundArrayWithInitWarning()
+void CheckOther::unboundArrayWithInitWarning() {
 
-reportError(tok, // location                        Severity::warning, // severity
-            
+reportError(tok, // location
+            Severity::warning, // severity
             "unboundArrayWithInit", // id
-            
             "Should have implicit array size when initializing with elements, not just []"); // messag
+}
