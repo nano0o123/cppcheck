@@ -41,16 +41,16 @@ public:
     /** @brief This constructor is used when registering the CheckClass */
     CheckOther() : Check(myName()) {
     }
-
+    
     /** @brief This constructor is used when running checks. */
     CheckOther(const Tokenizer *tokenizer, const Settings *settings, ErrorLogger *errorLogger)
-        : Check(myName(), tokenizer, settings, errorLogger) {
+    : Check(myName(), tokenizer, settings, errorLogger) {
     }
-
+    
     /** @brief Run checks against the normal token list */
     void runChecks(const Tokenizer *tokenizer, const Settings *settings, ErrorLogger *errorLogger) {
         CheckOther checkOther(tokenizer, settings, errorLogger);
-
+        
         // Checks
         checkOther.warningOldStylePointerCast();
         checkOther.invalidPointerCast();
@@ -75,11 +75,11 @@ public:
         checkOther.checkNanInArithmeticExpression();
         checkOther.checkCommaSeparatedReturn();
     }
-
+    
     /** @brief Run checks against the simplified token list */
     void runSimplifiedChecks(const Tokenizer *tokenizer, const Settings *settings, ErrorLogger *errorLogger) {
         CheckOther checkOther(tokenizer, settings, errorLogger);
-
+        
         // Checks
         checkOther.oppositeInnerCondition();
         checkOther.clarifyCalculation();
@@ -87,13 +87,13 @@ public:
         checkOther.checkConstantFunctionParameter();
         checkOther.checkIncompleteStatement();
         checkOther.checkCastIntToCharAndBack();
-
+        
         checkOther.invalidFunctionUsage();
         checkOther.checkZeroDivision();
         checkOther.checkZeroDivisionOrUselessCondition();
         checkOther.checkMathFunctions();
         checkOther.checkCCTypeFunctions();
-
+        
         checkOther.redundantGetAndSetUserId();
         checkOther.checkIncorrectLogicOperator();
         checkOther.checkMisusedScopedObject();
@@ -103,7 +103,7 @@ public:
         checkOther.checkAlwaysTrueOrFalseStringCompare();
         checkOther.checkModuloAlwaysTrueFalse();
         checkOther.checkPipeParameterSize();
-
+        
         checkOther.checkInvalidFree();
         checkOther.checkDoubleFree();
         checkOther.checkRedundantCopy();
@@ -111,26 +111,27 @@ public:
         checkOther.checkSuspiciousEqualityComparison();
         checkOther.checkSleepTimeInterval();
         checkOther.checkComparisonFunctionIsAlwaysTrueOrFalse();
+        checkOther.unboundArrayWithInit();
     }
-
+    
     /** To check the dead code in a program, which is inaccessible due to the counter-conditions check in nested-if statements **/
     void oppositeInnerCondition();
-
+    
     /** @brief Clarify calculation for ".. a * b ? .." */
     void clarifyCalculation();
-
+    
     /** @brief Suspicious condition (assignment+comparison) */
     void clarifyCondition();
-
+    
     /** @brief Suspicious statement like '*A++;' */
     void clarifyStatement();
-
+    
     /** @brief Are there C-style pointer casts in a c++ file? */
     void warningOldStylePointerCast();
-
+    
     /** @brief Check for pointer casts to a type with an incompatible binary data representation */
     void invalidPointerCast();
-
+    
     /**
      * @brief Invalid function usage (invalid radix / overlapping data)
      *
@@ -139,140 +140,140 @@ public:
      * - overlapping data when using sprintf/snprintf
      */
     void invalidFunctionUsage();
-
+    
     /** @brief %Check for unsigned division */
     void checkUnsignedDivision();
-
+    
     /** @brief %Check scope of variables */
     void checkVariableScope();
     static bool checkInnerScope(const Token *tok, const Variable* var, bool& used);
-
+    
     /** @brief %Check for comma separated statements in return */
     void checkCommaSeparatedReturn();
-
+    
     /** @brief %Check for constant function parameter */
     void checkConstantFunctionParameter();
-
+    
     /** @brief Using char variable as array index / as operand in bit operation */
     void checkCharVariable();
-
+    
     /** @brief Incomplete statement. A statement that only contains a constant or variable */
     void checkIncompleteStatement();
-
+    
     /** @brief str plus char (unusual pointer arithmetic) */
     void strPlusChar();
-
+    
     /** @brief %Check zero division*/
     void checkZeroDivision();
-
+    
     /** @brief %Check zero division / useless condition */
     void checkZeroDivisionOrUselessCondition();
-
+    
     /** @brief Check for NaN (not-a-number) in an arithmetic expression */
     void checkNanInArithmeticExpression();
-
+    
     /** @brief %Check for parameters given to math function that do not make sense*/
     void checkMathFunctions();
-
+    
     /** @brief %Check for parameters given to cctype function that do make error*/
     void checkCCTypeFunctions();
-
+    
     /** @brief % Check for seteuid(geteuid()) or setuid(getuid())*/
     void redundantGetAndSetUserId();
-
+    
     /** @brief copying to memory or assigning to a variable twice */
     void checkRedundantAssignment();
-
+    
     /** @brief %Check for assigning to the same variable twice in a switch statement*/
     void checkRedundantAssignmentInSwitch();
-
+    
     /** @brief %Check for code like 'case A||B:'*/
     void checkSuspiciousCaseInSwitch();
-
+    
     /** @brief %Check for code like 'case A||B:'*/
     void checkSuspiciousEqualityComparison();
-
+    
     /** @brief %Check for switch case fall through without comment */
     void checkSwitchCaseFallThrough();
-
+    
     /** @brief %Check for assigning a variable to itself*/
     void checkSelfAssignment();
-
+    
     /** @brief %Check for testing for mutual exclusion over ||*/
     void checkIncorrectLogicOperator();
-
+    
     /** @brief %Check for objects that are destroyed immediately */
     void checkMisusedScopedObject();
-
+    
     /** @brief %Check for filling zero bytes with memset() */
     void checkMemsetZeroBytes();
-
+    
     /** @brief %Check for using bad usage of strncmp and substr */
     void checkIncorrectStringCompare();
-
+    
     /** @brief %Check for comparison of a string literal with a char* variable */
     void checkSuspiciousStringCompare();
-
+    
     /** @brief %Check for suspicious code where multiple if have the same expression (e.g "if (a) { } else if (a) { }") */
     void checkDuplicateIf();
-
+    
     /** @brief %Check for suspicious code where if and else branch are the same (e.g "if (a) b = true; else b = true;") */
     void checkDuplicateBranch();
-
+    
     /** @brief %Check for suspicious code with the same expression on both sides of operator (e.g "if (a && a)") */
     void checkDuplicateExpression();
-
+    
     /** @brief %Check for suspicious code that compares string literals for equality */
     void checkAlwaysTrueOrFalseStringCompare();
-
+    
     /** @brief %Check for suspicious usage of modulo (e.g. "if(var % 4 == 4)") */
     void checkModuloAlwaysTrueFalse();
-
+    
     /** @brief %Check for code that gets never executed, such as duplicate break statements */
     void checkUnreachableCode();
-
+    
     /** @brief %Check for testing sign of unsigned variable */
     void checkSignOfUnsignedVariable();
-
+    
     /** @brief %Check for suspicious use of semicolon */
     void checkSuspiciousSemicolon();
-
+    
     /** @brief %Check for free() operations on invalid memory locations */
     void checkInvalidFree();
     void invalidFreeError(const Token *tok, bool inconclusive);
-
+    
     /** @brief %Check for double free or double close operations */
     void checkDoubleFree();
     void doubleFreeError(const Token *tok, const std::string &varname);
-
+    
     /** @brief %Check for code creating redundant copies */
     void checkRedundantCopy();
-
+    
     /** @brief %Check for bitwise operation with negative right operand */
     void checkNegativeBitwiseShift();
-
+    
     /** @brief %Check for buffers that are filled incompletely with memset and similar functions */
     void checkIncompleteArrayFill();
-
+    
     /** @brief %Check that variadic function calls don't use NULL. If NULL is \#defined as 0 and the function expects a pointer, the behaviour is undefined. */
     void checkVarFuncNullUB();
-
+    
     /** @brief %Check that calling the POSIX pipe() system call is called with an integer array of size two. */
     void checkPipeParameterSize();
-
+    
     /** @brief %Check to avoid casting a return value to unsigned char and then back to integer type.  */
     void checkCastIntToCharAndBack();
-
+    
     /** @brief %Check providing too big sleep time intervals on POSIX systems. */
     void checkSleepTimeInterval();
-
-    /** @brief %Check for using of comparision functions evaluating always to true or false. */
+    
+    /** @brief %Check for using of comparison functions evaluating always to true or false. */
     void checkComparisonFunctionIsAlwaysTrueOrFalse(void);
-
+    
 private:
     bool isUnsigned(const Variable *var) const;
     static bool isSigned(const Variable *var);
-
+    
     // Error messages..
     void checkComparisonFunctionIsAlwaysTrueOrFalseError(const Token* tok, const std::string &strFunctionName, const std::string &varName, const bool result);
     void checkSleepTimeError(const Token *tok, const std::string &strDim);
@@ -334,10 +335,10 @@ private:
     void incompleteArrayFillError(const Token* tok, const std::string& buffer, const std::string& function, bool boolean);
     void varFuncNullUBError(const Token *tok);
     void commaSeparatedReturnError(const Token *tok);
-
+    
     void getErrorMessages(ErrorLogger *errorLogger, const Settings *settings) const {
         CheckOther c(0, settings, errorLogger);
-
+        
         // error
         c.sprintfOverlappingDataError(0, "varname");
         c.udivError(0, false);
@@ -350,12 +351,12 @@ private:
         c.negativeBitwiseShiftError(0);
         c.checkPipeParameterSizeError(0, "varname", "dimension");
         c.checkSleepTimeError(0,"dimension");
-
+        
         //performance
         c.redundantCopyError(0, "varname");
         c.redundantCopyError(0, 0, "var");
         c.redundantAssignmentError(0, 0, "var", false);
-
+        
         // style/warning
         c.checkComparisonFunctionIsAlwaysTrueOrFalseError(0,"isless","varName",false);
         c.checkCastIntToCharAndBackError(0,"func_name");
@@ -402,84 +403,87 @@ private:
         c.nanInArithmeticExpressionError(0);
         c.commaSeparatedReturnError(0);
     }
-
+    
     static std::string myName() {
         return "Other";
     }
-
+    
     std::string classInfo() const {
         return "Other checks\n"
-
-               // error
-               "* Assigning bool value to pointer (converting bool value to address)\n"
-               "* division with zero\n"
-               "* scoped object destroyed immediately after construction\n"
-               "* assignment in an assert statement\n"
-               "* incorrect length arguments for 'substr' and 'strncmp'\n"
-               "* free() or delete of an invalid memory location\n"
-               "* double free() or double closedir()\n"
-               "* bitwise operation with negative right operand\n"
-               "* provide wrong dimensioned array to pipe() system command (--std=posix)\n"
-               "* cast the return values of getc(),fgetc() and getchar() to character and compare it to EOF\n"
-               "* provide too big sleep times on POSIX systems\n"
-
-               // warning
-               "* either division by zero or useless condition\n"
-
-               //performance
-               "* redundant data copying for const variable\n"
-               "* subsequent assignment or copying to a variable or buffer\n"
-
-               // style
-               "* Find dead code which is inaccessible due to the counter-conditions check in nested if statements\n"
-               "* C-style pointer cast in cpp file\n"
-               "* casting between incompatible pointer types\n"
-               "* redundant if\n"
-               "* bad usage of the function 'strtol'\n"
-               "* [[CheckUnsignedDivision|unsigned division]]\n"
-               "* passing parameter by value\n"
-               "* [[IncompleteStatement|Incomplete statement]]\n"
-               "* [[charvar|check how signed char variables are used]]\n"
-               "* variable scope can be limited\n"
-               "* condition that is always true/false\n"
-               "* unusual pointer arithmetic. For example: \"abc\" + 'd'\n"
-               "* redundant assignment in a switch statement\n"
-               "* redundant pre/post operation in a switch statement\n"
-               "* redundant bitwise operation in a switch statement\n"
-               "* redundant strcpy in a switch statement\n"
-               "* assignment of a variable to itself\n"
-               "* Suspicious case labels in switch()\n"
-               "* Suspicious equality comparisons\n"
-               "* mutual exclusion over || always evaluating to true\n"
-               "* Comparison of values leading always to true or false\n"
-               "* Clarify calculation with parentheses\n"
-               "* suspicious condition (assignment+comparison)\n"
-               "* suspicious condition (runtime comparison of string literals)\n"
-               "* suspicious condition (string literals as boolean)\n"
-               "* suspicious comparison of a string literal with a char* variable\n"
-               "* duplicate break statement\n"
-               "* unreachable code\n"
-               "* testing if unsigned variable is negative\n"
-               "* testing is unsigned variable is positive\n"
-               "* Suspicious use of ; at the end of 'if/for/while' statement.\n"
-               "* incorrect usage of functions from ctype library.\n"
-               "* Comparisons of modulo results that are always true/false.\n"
-               "* Array filled incompletely using memset/memcpy/memmove.\n"
-               "* redundant get and set function of user id (--std=posix).\n"
-               "* Passing NULL pointer to function with variable number of arguments leads to UB on some platforms.\n"
-               "* NaN (not a number) value used in arithmetic expression.\n"
-               "* comma in return statement (the comma can easily be misread as a semicolon).\n";
+        
+        // error
+        "* Assigning bool value to pointer (converting bool value to address)\n"
+        "* division with zero\n"
+        "* scoped object destroyed immediately after construction\n"
+        "* assignment in an assert statement\n"
+        "* incorrect length arguments for 'substr' and 'strncmp'\n"
+        "* free() or delete of an invalid memory location\n"
+        "* double free() or double closedir()\n"
+        "* bitwise operation with negative right operand\n"
+        "* provide wrong dimensioned array to pipe() system command (--std=posix)\n"
+        "* cast the return values of getc(),fgetc() and getchar() to character and compare it to EOF\n"
+        "* provide too big sleep times on POSIX systems\n"
+        
+        // warning
+        "* either division by zero or useless condition\n"
+        
+        //performance
+        "* redundant data copying for const variable\n"
+        "* subsequent assignment or copying to a variable or buffer\n"
+        
+        // style
+        "* Find dead code which is inaccessible due to the counter-conditions check in nested if statements\n"
+        "* C-style pointer cast in cpp file\n"
+        "* casting between incompatible pointer types\n"
+        "* redundant if\n"
+        "* bad usage of the function 'strtol'\n"
+        "* [[CheckUnsignedDivision|unsigned division]]\n"
+        "* passing parameter by value\n"
+        "* [[IncompleteStatement|Incomplete statement]]\n"
+        "* [[charvar|check how signed char variables are used]]\n"
+        "* variable scope can be limited\n"
+        "* condition that is always true/false\n"
+        "* unusual pointer arithmetic. For example: \"abc\" + 'd'\n"
+        "* redundant assignment in a switch statement\n"
+        "* redundant pre/post operation in a switch statement\n"
+        "* redundant bitwise operation in a switch statement\n"
+        "* redundant strcpy in a switch statement\n"
+        "* assignment of a variable to itself\n"
+        "* Suspicious case labels in switch()\n"
+        "* Suspicious equality comparisons\n"
+        "* mutual exclusion over || always evaluating to true\n"
+        "* Comparison of values leading always to true or false\n"
+        "* Clarify calculation with parentheses\n"
+        "* suspicious condition (assignment+comparison)\n"
+        "* suspicious condition (runtime comparison of string literals)\n"
+        "* suspicious condition (string literals as boolean)\n"
+        "* suspicious comparison of a string literal with a char* variable\n"
+        "* duplicate break statement\n"
+        "* unreachable code\n"
+        "* testing if unsigned variable is negative\n"
+        "* testing is unsigned variable is positive\n"
+        "* Suspicious use of ; at the end of 'if/for/while' statement.\n"
+        "* incorrect usage of functions from ctype library.\n"
+        "* Comparisons of modulo results that are always true/false.\n"
+        "* Array filled incompletely using memset/memcpy/memmove.\n"
+        "* redundant get and set function of user id (--std=posix).\n"
+        "* Passing NULL pointer to function with variable number of arguments leads to UB on some platforms.\n"
+        "* NaN (not a number) value used in arithmetic expression.\n"
+        "* comma in return statement (the comma can easily be misread as a semicolon).\n";
     }
-
+    
     void checkExpressionRange(const std::list<const Function*> &constFunctions,
                               const Token *start,
                               const Token *end,
                               const std::string &toCheck);
-
+    
     void complexDuplicateExpressionCheck(const std::list<const Function*> &constFunctions,
                                          const Token *classStart,
                                          const std::string &toCheck,
                                          const std::string &alt);
+    
+    void unboundArrayWithInit();
+    void unboundArrayWithInitWarning(const Token *tok);
 };
 /// @}
 //---------------------------------------------------------------------------
